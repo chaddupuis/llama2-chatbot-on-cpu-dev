@@ -1,0 +1,9 @@
+.venv/
+pdf-model-resources/
+.chainlit/
+__pycache__/
+vectorstores/
+pyvenv.cfg
+
+
+
