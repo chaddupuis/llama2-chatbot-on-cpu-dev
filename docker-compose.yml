@@ -1,5 +1,8 @@
+version: '2.3'
+
 services:
   app:
+    tty: true # need along with up -d otherwise container exits
     build: .
     container_name: cuda-llama-chat
     deploy:

@@ -5,9 +5,11 @@ bitsandbytes
 transformers
 sentence_transformers
 faiss_cpu
-chainlit
 ctransformers
 torch
 torchvision
 torchaudio
+dataclasses-json==0.5.14
+pydantic==1.10.13
+chainlit
 
