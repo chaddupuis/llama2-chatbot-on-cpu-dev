@@ -5,7 +5,7 @@ bitsandbytes
 transformers
 sentence_transformers
 faiss_cpu
-ctransformers
+ctransformers[cuda]
 torch
 torchvision
 torchaudio

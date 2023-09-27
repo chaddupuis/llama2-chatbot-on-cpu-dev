@@ -6,7 +6,7 @@ RUN apt install -y python3 python3-pip
 COPY ./requirements.txt /opt/app/requirements.txt
 WORKDIR /opt/app
 RUN pip install --no-cache -r requirements.txt
-COPY . /opt/app
+#COPY . /opt/app
 
 
 

@@ -6,6 +6,10 @@ from langchain.chains import RetrievalQA
 import chainlit as cl
 from torch import cuda
 
+
+## Generally Test with chainlit run ./model.py -w
+## compose has 8082:8000 - so http://localhost:8082 for dev
+
 device = 'cuda' if cuda.is_available() else 'cpu'
 cuda.empty_cache()
 print(device)
@@ -34,8 +38,10 @@ def load_llm():
     llm = CTransformers(
         model = "./pdf-model-resources/llama-2-7b-chat.Q8_0.gguf",
         model_type = "llama",
-        max_new_tokens = 512,
-        temperature = 0.5
+        max_new_tokens = 500,
+        repetition_penalty = 1.1,
+        temperature = 0.01,
+        gpu_layers = 50
     )
     return llm
 
@@ -91,4 +97,3 @@ async def main(message):
         answer += f"\nNo Sources Found"
 
     await cl.Message(content=answer).send()
-

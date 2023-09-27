@@ -3,6 +3,12 @@ version: '2.3'
 services:
   app:
     tty: true # need along with up -d otherwise container exits
+    ports:
+      - "8082:8000"
+    volumes:
+      - type: bind
+        source: .
+        target: /opt/app
     build: .
     container_name: cuda-llama-chat
     deploy:
