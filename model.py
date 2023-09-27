@@ -38,9 +38,12 @@ def load_llm():
     llm = CTransformers(
         model = "./pdf-model-resources/llama-2-7b-chat.Q8_0.gguf",
         model_type = "llama",
-        max_new_tokens = 500,
+        max_new_tokens = 256,
         repetition_penalty = 1.1,
-        temperature = 0.01,
+        temperature = 0.8,
+        context_length = -1,
+        threads = 20,
+        batch_size = 20,
         gpu_layers = 50
     )
     return llm
