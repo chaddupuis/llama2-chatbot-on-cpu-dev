@@ -1,6 +1,5 @@
 pypdf
 langchain
-torch
 accelerate
 bitsandbytes
 transformers
@@ -8,4 +7,7 @@ sentence_transformers
 faiss_cpu
 chainlit
 ctransformers
+torch
+torchvision
+torchaudio
 

@@ -4,6 +4,11 @@ from langchain.vectorstores import FAISS
 from langchain.llms import CTransformers
 from langchain.chains import RetrievalQA 
 import chainlit as cl
+from torch import cuda
+
+device = 'cuda' if cuda.is_available() else 'cpu'
+cuda.empty_cache()
+print(device)
 
 DB_FAISS_PATH = "./vectorstores/db_faiss"
 
@@ -45,7 +50,7 @@ def retrieval_qa_chain(llm, prompt, db):
     return qa_chain
 
 def qa_bot():
-    embeddings = HuggingFaceEmbeddings(model_name = 'sentence-transformers/all-MiniLM-L6-v2', model_kwargs = {'device': 'cuda'})
+    embeddings = HuggingFaceEmbeddings(model_name = 'sentence-transformers/all-MiniLM-L6-v2', model_kwargs = {'device': device})
     db = FAISS.load_local(DB_FAISS_PATH, embeddings)
     llm = load_llm()
     qa_prompt = set_custom_prompt()

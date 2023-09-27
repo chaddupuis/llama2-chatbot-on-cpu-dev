@@ -1,0 +1,12 @@
+services:
+  app:
+    build: .
+    container_name: cuda-llama-chat
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+              
