@@ -1,11 +1,12 @@
 from langchain.prompts import PromptTemplate
 from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.vectorstores import FAISS
-from langchain.llms import CTransformers
+#from langchain.llms import CTransformers
 from langchain.chains import RetrievalQA 
 import chainlit as cl
 from torch import cuda
-
+from ctransformers import AutoModelForCausalLM
+from transformers import AutoTokenizer
 
 ## Generally Test with chainlit run ./model.py -w
 ## compose has 8082:8000 - so http://localhost:8082 for dev
@@ -34,18 +35,30 @@ def set_custom_prompt():
 
     return prompt
 
+# model = "./pdf-model-resources/llama-2-7b-chat.Q8_0.gguf",
+
+
+
 def load_llm():
-    llm = CTransformers(
-        model = "./pdf-model-resources/llama-2-7b-chat.Q8_0.gguf",
-        model_type = "llama",
-        max_new_tokens = 256,
-        repetition_penalty = 1.1,
-        temperature = 0.8,
-        context_length = -1,
-        threads = 20,
-        batch_size = 20,
-        gpu_layers = 50
-    )
+    model_name_or_path = "./pdf-model-resources/llama7b"
+    llm = AutoModelForCausalLM.from_pretrained(model_name_or_path, model_type="gptq", local_files_only=True, batch_size=1)
+    #device_map="auto", trust_remote_code=False)
+    #tokenizer = AutoTokenizer.from_pretrained(model_name_or_path)
+    #generator = pipeline("text-generation", mode=model, tokenizer=tokenizer)
+
+    
+    # llm = CTransformers(
+    #     model = model,
+    #     model_type = "llama",
+    #     max_new_tokens = 256,
+    #     repetition_penalty = 1.1,
+    #     temperature = 0.8,
+    #     context_length = -1,
+    #     threads = 20,
+    #     batch_size = 20,
+    #     gpu_layers = 50
+    # )
+
     return llm
 
 def retrieval_qa_chain(llm, prompt, db):

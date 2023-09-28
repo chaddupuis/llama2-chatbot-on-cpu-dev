@@ -4,12 +4,14 @@ accelerate
 bitsandbytes
 transformers
 sentence_transformers
-faiss_cpu
-ctransformers[cuda]
+faiss-gpu
+ctransformers[gptq]
 torch
 torchvision
 torchaudio
 dataclasses-json==0.5.14
 pydantic==1.10.13
 chainlit
+optimum
+
 

@@ -12,6 +12,18 @@ https://huggingface.co/TheBloke/Llama-2-7b-Chat-GGUF/blob/main/llama-2-7b-chat.Q
 - mkdir ./pdf-model-resources and put your pdf source materials as well as the gguf file you plan to use.
 - Run ./ingest.py to read your pdfs and create your vector db
 
+### Ways to get the base model
+one way using snapshot_download from huggingface
+```
+from huggingface_hub import snapshot_download
+snapshot_download(
+    repo_id="TheBloke/Llama-2-7b-Chat-GPTQ",
+    local_dir="./pdf-model-resources/llama7b",
+    local_dir_use_symlinks=False,
+    resume_download=True
+)
+```
+
 ## To start chainlit chatbot in dev
 - has a bind mount (.:/opt/app) for the local directory so you can alter model, etc.
 - docker compose up -d
